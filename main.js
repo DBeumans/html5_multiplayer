@@ -9,7 +9,10 @@ app.get('/', (req, res)=>
 
 io.on('connection', (socket)=>
 {
-  console.log('connected');
+  console.log("user connected");
+  socket.on('disconnect', ()=>{
+    console.log('user disconnected');
+  });
 });
 
 http.listen(3000);
