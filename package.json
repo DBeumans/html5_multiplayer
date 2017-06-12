@@ -1,0 +1,9 @@
+{
+  "name": "HTML5 game",
+  "version": "0",
+  "description": "HTML5 game for MA",
+  "dependencies": {
+    "express": "^4.15.3",
+    "socket.io": "^2.0.3"
+  }
+}
