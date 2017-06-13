@@ -13,15 +13,12 @@ class InputManager {
   First Checks if it exists in the keys array, if it doens't exists add it.
   **/
   OnKeyPress(e) {
-    let char = this.toString(e.which || e.keyCode);
-    for (var i = 0; i < this.keys.length; i++) {
-      if(this.keys[i] == char)
-        return;
-    }
-    this.keys.push(char,false);
+    this.keyCodesCheck(e);
   }
 
   OnKeyDown(e) {
+    this. keyCodesCheck(e);
+
     for (var i = 0; i < this.keys.length; i++) {
       if(this.keys[i] == false)
       {
@@ -52,21 +49,41 @@ class InputManager {
     }
   }
 
+  keyCodesCheck(e) {
+    let char = this.toString(e.which || e.keyCode);
+    for (var i = 0; i < this.keys.length; i++) {
+      if(this.keys[i] == char)
+        return;
+    }
+    this.keys.push(char,false);
+  }
+
   /**
-  Convert keyeCode to string.
+  Convert keyCode to string.
   **/
   toString(key) {
-    key = String.fromCharCode(key);
+    if(key == 32) key = "space";
+    else if(key == 8) key = "backspace";
+    else if(key == 9) key = "tab";
+    else if(key == 13) key = "enter";
+    else if(key == 16) key = "shift";
+    else if(key == 17) key = "ctrl";
+    else if(key == 18) key = "alt";
+    else if(key == 20) key = "caps_lock";
+    else if(key == 27) key = "escape";
+    else if(key == 37) key = "left_arrow";
+    else if(key == 38) key = "up_arrow";
+    else if(key == 39) key = "right_arrow";
+    else if(key == 40) key = "down_arrow";
+
+
+    else key = String.fromCharCode(key);
 
     /**
     If space is pressed change " " to "space".
     **/
-    if(key == " ") // edit later.
-    {
-      key = "space";
-    }
 
-    console.log(key);
+    //console.log("Key: " + key);
     return key;
   }
 }
