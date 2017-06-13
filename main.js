@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const server = app.listen(3000);
 const io = require('socket.io')(server);
-const Game = require('./_Scripts/Game.js');
+const Game = require('./Lib/_Scripts/Game.js');
 
 app.use(express.static(__dirname));
 app.get('/', (req, res)=>{res.sendFile(__dirname + '/index.html');});

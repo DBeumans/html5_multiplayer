@@ -2,11 +2,11 @@
 {
   width: 20em;
   height: 25em;
-  background-color: #d9d9d9;
+  top: 2em;
+  left: 30em;
   position: fixed;
-  top: 20%;
-  left: 36%;
   border-radius: 1em;
+  background-color: #d9d9d9;
 }
 
 #nameField

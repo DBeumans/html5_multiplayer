@@ -2,21 +2,33 @@ const socket = io();
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const startscreen = new Startscreen("SKANQUE SIMULATOR");
-var me = null;
+const sprite = new Image();
+const speed = 10;
 
-
-startscreen.startButton.addEventListener('click',()=>
+let collision = null;
+let spriteWidth, spriteHeight;
+let me = null;
+let prevPos = new Vector2(0, 0);
+sprite.addEventListener('load',()=>
 {
-  me = new Player(socket.id, startscreen.nameField.value, 30, 20);
-  document.body.removeChild(startscreen.startWindow);
-  socket.emit('join', me);
-  setInterval(loop, 50);
-});
+  spriteWidth = sprite.width/7;
+  spriteHeight = sprite.height/7;
 
-/*
+  startscreen.startButton.addEventListener('click',()=>
+  {
+    me = new Player(socket.id, startscreen.nameField.value, 30, 20, spriteWidth, spriteHeight);
+    prevPos = new Vector2(me.x, me.y);
+    collision = new CollisionDetection(me);
+    document.body.removeChild(startscreen.startWindow);
+    socket.emit('join', me);
+    setInterval(loop, 50);
+  });
+});
+sprite.src = "Lib/images/test.png";
+
 window.addEventListener('keydown', (e)=>
 {
-  let speed = 10;
+  prevPos = new Vector2(me.x, me.y);
   if(e.keyCode == 37)
     me.x -= speed;
   if(e.keyCode == 38)
@@ -26,10 +38,14 @@ window.addEventListener('keydown', (e)=>
   if(e.keyCode == 40)
     me.y += speed;
 });
-*/
+
 
 function loop()
 {
+  if(me.x < 0)me.x = 0
+  if(me.x > canvas.width-spriteWidth)me.x = canvas.width - spriteWidth;
+  if(me.y < 0)me.y = 0;
+  if(me.y > canvas.height - spriteHeight)me.y = canvas.height - spriteHeight;
   socket.emit('loop', me);
 }
 
@@ -38,10 +54,9 @@ socket.on('sync', (playerData)=>
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for(let i = 0; i < playerData.length; i++)
   {
-    ctx.beginPath();
-    ctx.arc(playerData[i].x, playerData[i].y, 20, 0, 2*Math.PI);
-    ctx.fillText(playerData[i].name, playerData[i].x-(20), playerData[i].y-25);
-    ctx.stroke();
-    ctx.closePath();
+    if(collision != null)
+      collision.checkCollision(playerData[i], prevPos);
+    ctx.drawImage(sprite, playerData[i].x, playerData[i].y, spriteWidth, spriteHeight);
+    ctx.fillText(playerData[i].name, playerData[i].x+5, playerData[i].y-5);
   }
 });
