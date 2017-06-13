@@ -13,17 +13,21 @@ startscreen.startButton.addEventListener('click',()=>
   setInterval(loop, 50);
 });
 
+/*
 window.addEventListener('keydown', (e)=>
 {
+  let speed = 10;
   if(e.keyCode == 37)
-    me.x -= 5;
+    me.x -= speed;
   if(e.keyCode == 38)
-    me.y -= 5;
+    me.y -= speed;
   if(e.keyCode == 39)
-    me.x += 5;
+    me.x += speed;
   if(e.keyCode == 40)
-    me.y += 5;
+    me.y += speed;
 });
+*/
+
 function loop()
 {
   socket.emit('loop', me);
@@ -36,7 +40,7 @@ socket.on('sync', (playerData)=>
   {
     ctx.beginPath();
     ctx.arc(playerData[i].x, playerData[i].y, 20, 0, 2*Math.PI);
-    ctx.fillText(playerData[i].name, playerData[i].x-(20 + playerData[i].name.length), playerData[i].y-25);
+    ctx.fillText(playerData[i].name, playerData[i].x-(20), playerData[i].y-25);
     ctx.stroke();
     ctx.closePath();
   }
