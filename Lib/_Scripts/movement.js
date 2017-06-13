@@ -1,11 +1,30 @@
-let speed = 5;
-let jumpPower = 3;
+let playerSpeed = 5;
+let playerJumpPower = 3;
 
 function movementUpdate() {
+  if(me != null)
+      prevPos = new Vector2(me.x, me.y);
   if(input.isKeyDown("left_arrow"))
+  {
+    me.x -= speed;
     console.log("Left");
-    if(input.isKeyDown("up_arrow"))
-      console.log("up");
+  }
+  if(input.isKeyDown("up_arrow"))
+  {
+    me.y -= speed;
+    console.log("up");
+  }
+  if(input.isKeyDown("right_arrow"))
+  {
+    me.x += speed;
+    console.log("right");
+  }
+  if(input.isKeyDown("down_arrow"))
+  {
+    me.y += speed;
+    console.log("down");
+  }
+
 }
 
 /*
