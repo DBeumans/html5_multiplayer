@@ -13,6 +13,7 @@ class Startscreen
     this.nameField.setAttribute('type', 'text');
     this.nameField.setAttribute('maxlength', '32');
     this.nameField.setAttribute('id', 'nameField');
+    this.nameField.setAttribute('autofocus', 'autofocus');
 
     this.startButton = document.createElement('input');
     this.startButton.setAttribute('type', 'button');
@@ -25,7 +26,6 @@ class Startscreen
     creators.innerHTML += '<a href="http://madbytestudio.com/" target="_blank">Danilo Beumans</a>';
     creators.innerHTML += '<br />';
     creators.innerHTML += '<a href="http://www.freetimedev.com" target="_blank">Dani van der Werf</a>';
-    //const linebreak = document.createElement('br');
 
     this.startWindow.appendChild(head);
     this.startWindow.appendChild(this.nameField);
