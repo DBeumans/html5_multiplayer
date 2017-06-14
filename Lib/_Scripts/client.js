@@ -6,7 +6,6 @@ const ctx = canvas.getContext('2d');
 
 const startscreen = new Startscreen("SKANQUE SIMULATOR");
 const wallOne = new Wall(500, 300, 200, 200, "wall");
-const pingCounter = new PingCounter();
 const sprite = new Image();
 const debug = new Debug();
 
@@ -26,7 +25,7 @@ sprite.addEventListener('load',()=>
   {
     me = new Player(socket.id, startscreen.nameField.value, 100, 100, spriteWidth, spriteHeight);
     prevPos = new Vector2(me.x, me.y);
-    collision = new CollisionDetection(me);
+    collision = new BoxCollision(me);
     document.body.removeChild(startscreen.startWindow);
     socket.emit('join', me);
     setInterval(loop, 25);
@@ -49,14 +48,13 @@ window.addEventListener('keydown', e =>
 
 function loop()
 {
-  if(me.x < 0 + (spriteWidth/2))me.x = 0+(spriteWidth/2);
-  if(me.x > canvas.width-spriteWidth)me.x = canvas.width - spriteWidth;
+  if(me.x < 0 + (spriteWidth/2))me.x = 0 + (spriteWidth/2);
+  if(me.x > canvas.width - spriteWidth)me.x = canvas.width - spriteWidth;
   if(me.y < 0 + (spriteHeight/2))me.y = 0+(spriteHeight/2);
   if(me.y > canvas.height - spriteHeight/2)me.y = canvas.height - spriteHeight/2;
   if(collision != null)
     collision.checkCollision(wallOne, prevPos);
   socket.emit('loop', me);
-  pingCounter.showfps();
 }
 
 socket.on('sync', (playerData)=>
@@ -67,19 +65,5 @@ socket.on('sync', (playerData)=>
     ctx.drawImage(sprite, playerData[i].x-spriteWidth/2, playerData[i].y-spriteHeight/2, spriteWidth, spriteHeight);
     ctx.fillText(playerData[i].name, playerData[i].x - playerData[i].name.length * 2, playerData[i].y - 60);
     wallOne.draw(ctx);
-    debug.visualizePosition(wallOne.x, wallOne.y, ctx);
-    debug.visualizePosition(playerData[i].x, playerData[i].y, ctx);
-    /*
-    ctx.beginPath();
-    ctx.arc(wallOne.x-(wallOne.width/2+spriteWidth/2), wallOne.y, 10, 0, 2*Math.PI);
-    ctx.stroke();
-    ctx.closePath();
-
-    ctx.beginPath();
-    ctx.arc(playerData[i].x, playerData[i].y, 10, 0, 2*Math.PI);
-    ctx.stroke();
-    ctx.closePath();
-    */
-
   }
 });

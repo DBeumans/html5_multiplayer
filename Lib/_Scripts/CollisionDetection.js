@@ -1,4 +1,4 @@
-class CollisionDetection
+class BoxCollision
 {
   constructor(object)
   {
