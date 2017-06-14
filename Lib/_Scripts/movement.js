@@ -1,29 +1,52 @@
-let playerSpeed = 5;
-let playerJumpPower = 3;
+let playerSpeed = 10;
+let playerJumpPower = 30;
+let playerGravity = 1;
+let playerVelocityX = 0;
+let playerVelocityY = 0;
+let playerFriciton = 1;
+let playerIsJumping = false;
 
 function movementUpdate() {
   if(me != null)
       prevPos = new Vector2(me.x, me.y);
-  if(input.isKeyDown("left_arrow"))
+
+  // Jumping | W , ArrowUP
+  if(input.keys[38] == true || input.keys[87] == true || input.keys[32] == true)
   {
-    me.x -= speed;
-    console.log("Left");
+    if(playerIsJumping == false)
+    {
+      playerIsJumping = true;
+      playerVelocityY = -playerSpeed*2;
+      console.log("Jumping");
+    }
   }
-  if(input.isKeyDown("up_arrow"))
+
+  //Right | D , ArrowRIGHT
+  if(input.keys[39] == true || input.keys[68] == true)
   {
-    me.y -= speed;
-    console.log("up");
+    if(playerVelocityX < playerSpeed)
+    {
+      playerVelocityX++;
+      console.log("Right");
+    }
   }
-  if(input.isKeyDown("right_arrow"))
+
+  //Left | A , ArrowLEFT
+  if(input.keys[37] == true || input.keys[65] == true)
   {
-    me.x += speed;
-    console.log("right");
+    if(playerVelocityX > -playerSpeed)
+    {
+      playerVelocityX--;
+      console.log("Left");
+    }
   }
-  if(input.isKeyDown("down_arrow"))
-  {
-    me.y += speed;
-    console.log("down");
-  }
+
+  playerVelocityX *= playerFriciton;
+  playerVelocityY += playerGravity;
+
+  me.x += playerVelocityX;
+  me.y += playerVelocityY;
+
 
 }
 

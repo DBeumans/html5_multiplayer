@@ -1,43 +1,29 @@
 class InputManager {
 
   constructor() {
-    this.keys = []; // create a empty array to store keys
+    this.keys = {}; // create a empty array to store keys
 
     window.addEventListener("keydown", this.OnKeyDown.bind(this));
     window.addEventListener("keyup", this.OnKeyUp.bind(this));
-    window.addEventListener("keypress", this.OnKeyPress.bind(this));
-  }
-
-  /**
-  Register key press and convert them into a string.
-  First Checks if it exists in the keys array, if it doens't exists add it.
-  **/
-  OnKeyPress(e) {
-    this.keyCodesCheck(e);
+    //window.addEventListener("keypress", this.OnKeyPress.bind(this));
   }
 
   OnKeyDown(e) {
-    this. keyCodesCheck(e);
-
-    for (var i = 0; i < this.keys.length; i++) {
-      if(this.keys[i] == false)
-      {
-        this.keys[i] = true;
-      }
-    }
+    this.keys[e.keyCode] = true;
   }
 
   OnKeyUp(e) {
-    for (var i = 0; i < this.keys.length; i++) {
-      if(this.keys[i] == true)
-        this.keys[i] = false;
-    }
-      this.keys.splice(0,e.keyCode);
+    this.keys[e.keyCode] = false;
+
   }
 
-  /**
+  /***
+
+  OLD STUFF
+  USE AT YOUR OWN RISK
+
   Use this function to check if a key is down.
-  **/
+
   isKeyDown(key) {
     for (var i = 0; i < this.keys.length; i++) {
       if(this.keys[i] == key)
@@ -58,9 +44,9 @@ class InputManager {
     this.keys.push(char,false);
   }
 
-  /**
+
   Convert keyCode to string.
-  **/
+
   toString(key) {
     if(key == 32) key = "space";
     else if(key == 8) key = "backspace";
@@ -76,14 +62,10 @@ class InputManager {
     else if(key == 39) key = "right_arrow";
     else if(key == 40) key = "down_arrow";
 
-
     else key = String.fromCharCode(key);
-
-    /**
-    If space is pressed change " " to "space".
-    **/
-
     //console.log("Key: " + key);
     return key;
   }
+
+  **/
 }

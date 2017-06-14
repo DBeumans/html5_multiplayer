@@ -23,23 +23,10 @@ sprite.addEventListener('load',()=>
     collision = new CollisionDetection(me);
     document.body.removeChild(startscreen.startWindow);
     socket.emit('join', me);
-    setInterval(loop, 50);
+    setInterval(loop, 25);
   });
 });
 sprite.src = "Lib/images/test.png";
-
-window.addEventListener('keydown', (e)=>
-{
-  if(e.keyCode == 37)
-    me.x -= speed;
-  if(e.keyCode == 38)
-    me.y -= speed;
-  if(e.keyCode == 39)
-    me.x += speed;
-  if(e.keyCode == 40)
-    me.y += speed;
-});
-
 
 function loop()
 {
@@ -53,7 +40,6 @@ function loop()
 
 socket.on('sync', (playerData)=>
 {
-  console.log("dad");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for(let i = 0; i < playerData.length; i++)
   {
