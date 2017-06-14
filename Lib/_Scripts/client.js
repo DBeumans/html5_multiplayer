@@ -5,7 +5,7 @@ const fpsDOM = document.getElementById('fps');
 const ctx = canvas.getContext('2d');
 
 const startscreen = new Startscreen("SKANQUE SIMULATOR");
-const wallOne = new Wall(500, 500, 200, 50, "wall");
+const wallOne = new Wall(500, 500, 23, 124, "wall");
 const sprite = new Image();
 const debug = new Debug();
 
@@ -39,7 +39,7 @@ function loop()
 {
   movementUpdate();
   if(collision != null)
-    collision.checkCollision(wallOne, prevPos);
+    collision.checkCollision(me, wallOne);
   if(me.x < 0 + (spriteWidth/2))me.x = 0 + (spriteWidth/2);
   if(me.x > canvas.width - spriteWidth)me.x = canvas.width - spriteWidth;
   if(me.y < 0 + (spriteHeight/2))me.y = 0+(spriteHeight/2);
