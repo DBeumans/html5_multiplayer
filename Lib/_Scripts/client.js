@@ -10,6 +10,8 @@ const pingCounter = new PingCounter();
 const sprite = new Image();
 const debug = new Debug();
 
+const input = new InputManager();
+
 let prevPos = new Vector2(0, 0);
 let collision = null;
 let spriteHeight;
@@ -34,21 +36,9 @@ sprite.addEventListener('load',()=>
 });
 sprite.src = "Lib/images/test.png";
 
-window.addEventListener('keydown', e =>
-{
-  prevPos = new Vector2(me.x, me.y);
-  if(e.keyCode == 37)
-    me.x -= speed;
-  if(e.keyCode == 38)
-    me.y -= speed;
-  if(e.keyCode == 39)
-    me.x += speed;
-  if(e.keyCode == 40)
-    me.y += speed;
-});
-
 function loop()
 {
+  movementUpdate();
   if(me.x < 0 + (spriteWidth/2))me.x = 0+(spriteWidth/2);
   if(me.x > canvas.width-spriteWidth)me.x = canvas.width - spriteWidth;
   if(me.y < 0 + (spriteHeight/2))me.y = 0+(spriteHeight/2);
