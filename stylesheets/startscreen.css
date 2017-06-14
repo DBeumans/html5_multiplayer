@@ -3,7 +3,7 @@
   width: 20em;
   height: 25em;
   top: 2em;
-  left: 30em;
+  left: calc(50% - 10em);
   position: fixed;
   border-radius: 1em;
   background-color: #d9d9d9;
