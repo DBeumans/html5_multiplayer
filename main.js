@@ -3,20 +3,40 @@ const app = express();
 const server = app.listen(3000);
 const io = require('socket.io')(server);
 const Game = require('./Lib/_Scripts/Game.js');
+const game = new Game();
 
 app.use(express.static(__dirname));
 app.get('/', (req, res)=>{res.sendFile(__dirname + '/index.html');});
 
-const game = new Game();
-io.on('connection', (client)=>
+io.on('connection', client =>
 {
   client.send(client.id);
-  client.on('join', (player)=>
+
+  client.emit('updatePlayers', game.data);
+  client.on('join', player =>
   {
-    game.addPlayer(player);
-    console.log(player.name + " joined!");
+    game.addData(player);
+    client.emit('updatePlayers', game.data);
+    client.broadcast.emit('updatePlayers', game.data);
   });
 
+  client.on('updateValues', playerData =>
+  {
+    game.updateData(playerData);
+    client.emit('updateValues',game.data);
+    client.broadcast.emit('updateValues', game.data);
+  });
+
+  client.on('disconnect', ()=>
+  {
+    console.log(client.id + " left");
+    game.removePlayer(client.id);
+    client.broadcast.emit('updatePlayers', game.data);
+  });
+
+  //setInterval(client.broadcast.emit('sync', game.data), 100);
+
+  /*
   client.on('loop', (playerData)=>
   {
     if(playerData == undefined)
@@ -26,10 +46,5 @@ io.on('connection', (client)=>
     client.emit('sync', game.players);
     client.broadcast.emit('sync', game.players);
   });
-
-  client.on('disconnect', ()=>
-  {
-    console.log(game.getPlayerNameById(client.id) + " left");
-    game.removePlayer(client.id);
-  });
+*/
 });
