@@ -4,8 +4,6 @@ let playerVelocityY = 0;
 let playerFriciton = .9;
 
 function movementUpdate() {
-  if(me != null)
-      prevPos = new Vector2(me.x, me.y);
 
   //Up | W , ArrowUP
   if(input.keys[38] == true || input.keys[87] == true)
