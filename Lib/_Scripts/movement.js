@@ -1,22 +1,28 @@
 let playerSpeed = 10;
-let playerJumpPower = 30;
-let playerGravity = .8;
 let playerVelocityX = 0;
 let playerVelocityY = 0;
 let playerFriciton = .9;
-let playerIsJumping = false;
 
 function movementUpdate() {
   if(me != null)
       prevPos = new Vector2(me.x, me.y);
 
-  // Jumping | W , ArrowUP
-  if(input.keys[38] == true || input.keys[87] == true || input.keys[32] == true)
+  //Up | W , ArrowUP
+  if(input.keys[38] == true || input.keys[87] == true)
   {
-    if(playerIsJumping == false)
+    playerIsJumping = true;
+    if(playerVelocityY > -playerSpeed)
     {
-      playerIsJumping = true;
-      playerVelocityY = -playerSpeed*2;
+      playerVelocityY--;
+    }
+  }
+
+  //Down | S , ArrowDOWN
+  if(input.keys[40] == true || input.keys[83] == true)
+  {
+    if(playerVelocityY < playerSpeed)
+    {
+      playerVelocityY++;
     }
   }
 
@@ -39,12 +45,11 @@ function movementUpdate() {
   }
 
   playerVelocityX *= playerFriciton;
-  playerVelocityY += playerGravity;
+  playerVelocityY *= playerFriciton;
 
   me.x += playerVelocityX;
   me.y += playerVelocityY;
 
-//    requestAnimationFrame(movementUpdate);
 }
 
 /*
