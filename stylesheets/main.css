@@ -16,3 +16,12 @@ h1
   color: white;
   text-align: center;
 }
+
+#fps
+{
+  color: #333333;
+  position: relative;
+  width: 50%;
+  bottom: 37em;
+  left: calc(50% - 30.5em);
+}

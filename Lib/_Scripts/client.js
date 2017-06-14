@@ -1,16 +1,23 @@
 const socket = io();
+
 const canvas = document.getElementById('canvas');
+const fpsDOM = document.getElementById('fps');
 const ctx = canvas.getContext('2d');
+
 const startscreen = new Startscreen("SKANQUE SIMULATOR");
+const wallOne = new Wall(500, 200, 200, 60);
+const framecounter = new Framecounter();
 const sprite = new Image();
-const speed = 10;
 
 const input = new InputManager();
 
-let collision = null;
-let spriteWidth, spriteHeight;
-let me = null;
 let prevPos = new Vector2(0, 0);
+let collision = null;
+let spriteHeight;
+const speed = 10;
+let spriteWidth;
+let me = null;
+
 sprite.addEventListener('load',()=>
 {
   spriteWidth = sprite.width/7;
@@ -30,22 +37,26 @@ sprite.src = "Lib/images/test.png";
 
 function loop()
 {
-  if(me.x < 0)me.x = 0
-  if(me.x > canvas.width-spriteWidth)me.x = canvas.width - spriteWidth;
-  if(me.y < 0)me.y = 0;
-  if(me.y > canvas.height - spriteHeight)me.y = canvas.height - spriteHeight;
   movementUpdate();
+  if(me.x < 0 + (spriteWidth/2))me.x = 0+(spriteWidth/2);
+  if(me.x > canvas.width-spriteWidth)me.x = canvas.width - spriteWidth;
+  if(me.y < 0 + (spriteHeight/2))me.y = 0+(spriteHeight/2);
+  if(me.y > canvas.height - spriteHeight/2)me.y = canvas.height - spriteHeight/2;
   socket.emit('loop', me);
+  framecounter.showfps();
 }
 
+  var lastCalledTime;
+var fps;
 socket.on('sync', (playerData)=>
 {
+  if(collision != null)
+    collision.checkCollision(wallOne, prevPos);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for(let i = 0; i < playerData.length; i++)
   {
-    if(collision != null)
-      collision.checkCollision(playerData[i], prevPos);
-    ctx.drawImage(sprite, playerData[i].x, playerData[i].y, spriteWidth, spriteHeight);
-    ctx.fillText(playerData[i].name, playerData[i].x+5, playerData[i].y-5);
+    ctx.drawImage(sprite, playerData[i].x-spriteWidth/2, playerData[i].y-spriteHeight/2, spriteWidth, spriteHeight);
+    ctx.fillText(playerData[i].name, playerData[i].x - playerData[i].name.length * 2, playerData[i].y - 60);
+    wallOne.draw(ctx);
   }
 });

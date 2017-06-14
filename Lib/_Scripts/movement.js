@@ -1,9 +1,9 @@
 let playerSpeed = 10;
 let playerJumpPower = 30;
-let playerGravity = 1;
+let playerGravity = .8;
 let playerVelocityX = 0;
 let playerVelocityY = 0;
-let playerFriciton = 1;
+let playerFriciton = .9;
 let playerIsJumping = false;
 
 function movementUpdate() {
@@ -17,7 +17,6 @@ function movementUpdate() {
     {
       playerIsJumping = true;
       playerVelocityY = -playerSpeed*2;
-      console.log("Jumping");
     }
   }
 
@@ -27,7 +26,6 @@ function movementUpdate() {
     if(playerVelocityX < playerSpeed)
     {
       playerVelocityX++;
-      console.log("Right");
     }
   }
 
@@ -37,7 +35,6 @@ function movementUpdate() {
     if(playerVelocityX > -playerSpeed)
     {
       playerVelocityX--;
-      console.log("Left");
     }
   }
 
@@ -47,7 +44,7 @@ function movementUpdate() {
   me.x += playerVelocityX;
   me.y += playerVelocityY;
 
-
+//    requestAnimationFrame(movementUpdate);
 }
 
 /*
