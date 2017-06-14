@@ -5,9 +5,10 @@ const fpsDOM = document.getElementById('fps');
 const ctx = canvas.getContext('2d');
 
 const startscreen = new Startscreen("SKANQUE SIMULATOR");
-const wallOne = new Wall(500, 200, 200, 60);
-const framecounter = new Framecounter();
+const wallOne = new Wall(500, 300, 200, 200, "wall");
+const pingCounter = new PingCounter();
 const sprite = new Image();
+const debug = new Debug();
 
 let prevPos = new Vector2(0, 0);
 let collision = null;
@@ -52,21 +53,33 @@ function loop()
   if(me.x > canvas.width-spriteWidth)me.x = canvas.width - spriteWidth;
   if(me.y < 0 + (spriteHeight/2))me.y = 0+(spriteHeight/2);
   if(me.y > canvas.height - spriteHeight/2)me.y = canvas.height - spriteHeight/2;
-  socket.emit('loop', me);
-  framecounter.showfps();
-}
-
-  var lastCalledTime;
-var fps;
-socket.on('sync', (playerData)=>
-{
   if(collision != null)
     collision.checkCollision(wallOne, prevPos);
+  socket.emit('loop', me);
+  pingCounter.showfps();
+}
+
+socket.on('sync', (playerData)=>
+{
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for(let i = 0; i < playerData.length; i++)
   {
     ctx.drawImage(sprite, playerData[i].x-spriteWidth/2, playerData[i].y-spriteHeight/2, spriteWidth, spriteHeight);
     ctx.fillText(playerData[i].name, playerData[i].x - playerData[i].name.length * 2, playerData[i].y - 60);
     wallOne.draw(ctx);
+    debug.visualizePosition(wallOne.x, wallOne.y, ctx);
+    debug.visualizePosition(playerData[i].x, playerData[i].y, ctx);
+    /*
+    ctx.beginPath();
+    ctx.arc(wallOne.x-(wallOne.width/2+spriteWidth/2), wallOne.y, 10, 0, 2*Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.arc(playerData[i].x, playerData[i].y, 10, 0, 2*Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+    */
+
   }
 });

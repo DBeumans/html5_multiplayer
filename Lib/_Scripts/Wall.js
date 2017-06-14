@@ -1,6 +1,6 @@
 class Wall
 {
-  constructor(x, y, w, h)
+  constructor(x, y, w, h, id, image)
   {
     this.x = x;
     this.y = y;
@@ -16,8 +16,8 @@ class Wall
       this.spriteWidth = (this.width/(this.xAmount * this.sprite.width)) * this.sprite.width;
       this.spriteHeight = (this.height/(this.yAmount * this.sprite.height)) * this.sprite.width;
     });
-    this.id = "wall";
-    this.sprite.src = "Lib/images/wallSprite.png";
+    this.id = id || "obstacle";
+    this.sprite.src = image || "Lib/images/wallSprite.png";
   }
 
   draw(ctx)

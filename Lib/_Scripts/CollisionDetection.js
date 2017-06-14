@@ -10,10 +10,12 @@ class CollisionDetection
     if(objectToCheck.id == this.object.id)
       return;
 
-    let leftSide = (objectToCheck.x - (objectToCheck.width/2));
-    let rigtSide = (objectToCheck.x + (objectToCheck.width/2));
-    let upSide = (objectToCheck.y + (objectToCheck.height));
-    let downSide = (objectToCheck.y - (objectToCheck.height));
+    const heightOffset = this.object.height/2;
+    const widthOffset = this.object.width/2;
+    const leftSide = (objectToCheck.x - (objectToCheck.width/2 + widthOffset));
+    const rigtSide = (objectToCheck.x + (objectToCheck.width/2 + widthOffset));
+    const upSide = (objectToCheck.y + (objectToCheck.height/2 + heightOffset));
+    const downSide = (objectToCheck.y - (objectToCheck.height/2 + heightOffset));
 
     if(this.object.x > leftSide && this.object.x < rigtSide && this.object.y < upSide && this.object.y > downSide)
     {
