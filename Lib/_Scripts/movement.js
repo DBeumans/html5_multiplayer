@@ -1,65 +1,52 @@
-
-function movementUpdate() {
-
-  //Up | W , ArrowUP
-  if(input.keys[38] == true || input.keys[87] == true)
-  {
-    me.playerIsJumping = true;
-    if(me.playerVelocityY > -me.playerSpeed)
-    {
-      me.playerVelocityY--;
-    }
-  }
-
-  //Down | S , ArrowDOWN
-  if(input.keys[40] == true || input.keys[83] == true)
-  {
-    if(me.playerVelocityY < me.playerSpeed)
-    {
-      me.playerVelocityY++;
-    }
-  }
-
-  //Right | D , ArrowRIGHT
-  if(input.keys[39] == true || input.keys[68] == true)
-  {
-    if(me.playerVelocityX < me.playerSpeed)
-    {
-      me.playerVelocityX++;
-    }
-  }
-
-  //Left | A , ArrowLEFT
-  if(input.keys[37] == true || input.keys[65] == true)
-  {
-    if(me.playerVelocityX > -me.playerSpeed)
-    {
-      me.playerVelocityX--;
-    }
-  }
-
-  me.playerVelocityX *= me.playerFriciton;
-  me.playerVelocityY *= me.playerFriciton;
-
-  me.x += me.playerVelocityX;
-  me.y += me.playerVelocityY;
-
-}
-
-/*
 class Movement {
-  constructor(speed, jumpPower , InputManager) {
-    this.speed = speed || 5;
-    this.jumpPower = jumpPower || 3;
-    this.input = InputManager || null;
+  constructor(player) {
+    this.input = new InputManager();
+    this.player = player;
+    console.log(this.input);
+    console.log(this.player);
   }
 
-  update() {
-    console.log("update");
-    if(this.input.isKeyDown("left_arrow"))
+  movementUpdate() {
+    //Up | W , ArrowUP
+    if(this.input.keys[38] == true || this.input.keys[87] == true)
     {
-      console.log("test");
+      if(this.player.playerVelocityY > -this.player.playerSpeed)
+      {
+        this.player.playerVelocityY--;
+      }
     }
+
+    //Down | S , ArrowDOWN
+    if(this.input.keys[40] == true || this.input.keys[83] == true)
+    {
+      if(this.player.playerVelocityY < this.player.playerSpeed)
+      {
+        this.player.playerVelocityY++;
+      }
+    }
+
+    //Right | D , ArrowRIGHT
+    if(this.input.keys[39] == true || this.input.keys[68] == true)
+    {
+      if(this.player.playerVelocityX < this.player.playerSpeed)
+      {
+        this.player.playerVelocityX++;
+      }
+    }
+
+    //Left | A , ArrowLEFT
+    if(this.input.keys[37] == true || this.input.keys[65] == true)
+    {
+      if(this.player.playerVelocityX > -this.player.playerSpeed)
+      {
+        this.player.playerVelocityX--;
+      }
+    }
+
+    this.player.playerVelocityX *= this.player.playerFriciton;
+    this.player.playerVelocityY *= this.player.playerFriciton;
+
+    this.player.x += this.player.playerVelocityX;
+    this.player.y += this.player.playerVelocityY;
   }
 }
-*/
