@@ -19,7 +19,6 @@ let me = null;
 window.addEventListener('startGame', ()=>
 {
   startscreen.loadingScreen();
-
   sprite.addEventListener('load',()=>
   {
     spriteWidth = sprite.width*(maxPlayerWidth/sprite.width);
@@ -45,7 +44,7 @@ function loop()
   movementUpdate();
   if(collision != null)
   {
-    collision.checkCollision(me, wallOne);
+    collision.checkCollision(wallOne);
   }
 
   if(me.x < 0 + (spriteWidth/2))me.x = 0 + (spriteWidth/2);
