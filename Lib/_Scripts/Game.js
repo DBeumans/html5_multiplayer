@@ -2,41 +2,12 @@ class Game
 {
   constructor()
   {
-    this.players = [];
+    this.data = [];
   }
 
-  addPlayer(player)
-  {
-    this.players.push(player);
-  }
+  addData(playerData){this.data.push(playerData); console.log(playerData.id);}
+  updateData(data){this.data[data.id] = data;}
 
-  removePlayer(playerId)
-  {
-    for (let i = 0; i < this.players.length; i++)
-    {
-      if(this.players[i].id == playerId)
-        this.players.splice(i, 1);
-    }
-  }
-
-  updatePlayer(player)
-  {
-    for(let i = 0; i < this.players.length; i++)
-    {
-      if(this.players[i].id != player.id)
-        continue;
-      this.players[i].x = player.x;
-      this.players[i].y = player.y;
-    }
-  }
-
-  getPlayerNameById(playerId)
-  {
-    for (let i = 0; i < this.players.length; i++)
-    {
-      if(this.players[i].id == playerId)
-        return this.players[i].name;
-    }
-  }
+  removePlayer(id){this.data.splice(id, 1);}
 };
 module.exports = Game;
