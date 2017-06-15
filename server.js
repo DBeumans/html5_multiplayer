@@ -33,18 +33,4 @@ io.on('connection', client =>
     game.removePlayer(client.id);
     client.broadcast.emit('updatePlayers', game.data);
   });
-
-  //setInterval(client.broadcast.emit('sync', game.data), 100);
-
-  /*
-  client.on('loop', (playerData)=>
-  {
-    if(playerData == undefined)
-      return;
-
-    game.updatePlayer(playerData);
-    client.emit('sync', game.players);
-    client.broadcast.emit('sync', game.players);
-  });
-*/
 });

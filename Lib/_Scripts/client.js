@@ -9,27 +9,29 @@ const input = new InputManager();
 const sprite = new Image();
 const debug = new Debug();
 
+const maxPlayerWidth = 50;
+const maxPlayerHeight = 110;
 let collision = null;
 const players = [];
 let spriteHeight;
 let spriteWidth;
 let me = null;
-
-sprite.addEventListener('load',()=>
+window.addEventListener('startGame', ()=>
 {
-  spriteWidth = sprite.width/7;
-  spriteHeight = sprite.height/7;
+  startscreen.loadingScreen();
 
-  startscreen.startButton.addEventListener('click',()=>
+  sprite.addEventListener('load',()=>
   {
-    me = new Player(players.length, startscreen.nameField.value, 100, 100, spriteWidth, spriteHeight);
+    spriteWidth = sprite.width*(maxPlayerWidth/sprite.width);
+    spriteHeight = sprite.height*(maxPlayerHeight/sprite.height);
+    me = new Player(players.length, startscreen.name, 100, 100, spriteWidth, spriteHeight);
     collision = new BoxCollision(me);
-    document.body.removeChild(startscreen.startWindow);
+    startscreen.destroy();
     socket.emit('join', me);
     setInterval(loop, 25);
   });
+  sprite.src = "Lib/images/test.png";
 });
-sprite.src = "Lib/images/test.png";
 
 socket.on('updatePlayers', (data)=>
 {
@@ -41,7 +43,6 @@ socket.on('updatePlayers', (data)=>
 function loop()
 {
   movementUpdate();
-  //Check collision here
   if(collision != null)
   {
     collision.checkCollision(me, wallOne);

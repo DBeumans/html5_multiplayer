@@ -9,7 +9,18 @@
   background-color: #d9d9d9;
 }
 
-#nameField
+.head
+{
+  color: black;
+  text-align: center;
+}
+
+.label
+{
+  margin: 0 0 0 .7em;
+}
+
+.inputField
 {
   border: none;
   display: block;
