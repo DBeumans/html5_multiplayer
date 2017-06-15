@@ -1,7 +1,3 @@
-let playerSpeed = 10;
-let playerVelocityX = 0;
-let playerVelocityY = 0;
-let playerFriciton = .9;
 
 function movementUpdate() {
   if(me != null)
@@ -10,45 +6,45 @@ function movementUpdate() {
   //Up | W , ArrowUP
   if(input.keys[38] == true || input.keys[87] == true)
   {
-    playerIsJumping = true;
-    if(playerVelocityY > -playerSpeed)
+    me.playerIsJumping = true;
+    if(me.playerVelocityY > -me.playerSpeed)
     {
-      playerVelocityY--;
+      me.playerVelocityY--;
     }
   }
 
   //Down | S , ArrowDOWN
   if(input.keys[40] == true || input.keys[83] == true)
   {
-    if(playerVelocityY < playerSpeed)
+    if(me.playerVelocityY < me.playerSpeed)
     {
-      playerVelocityY++;
+      me.playerVelocityY++;
     }
   }
 
   //Right | D , ArrowRIGHT
   if(input.keys[39] == true || input.keys[68] == true)
   {
-    if(playerVelocityX < playerSpeed)
+    if(me.playerVelocityX < me.playerSpeed)
     {
-      playerVelocityX++;
+      me.playerVelocityX++;
     }
   }
 
   //Left | A , ArrowLEFT
   if(input.keys[37] == true || input.keys[65] == true)
   {
-    if(playerVelocityX > -playerSpeed)
+    if(me.playerVelocityX > -me.playerSpeed)
     {
-      playerVelocityX--;
+      me.playerVelocityX--;
     }
   }
 
-  playerVelocityX *= playerFriciton;
-  playerVelocityY *= playerFriciton;
+  me.playerVelocityX *= me.playerFriciton;
+  me.playerVelocityY *= me.playerFriciton;
 
-  me.x += playerVelocityX;
-  me.y += playerVelocityY;
+  me.x += me.playerVelocityX;
+  me.y += me.playerVelocityY;
 
 }
 

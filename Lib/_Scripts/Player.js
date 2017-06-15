@@ -1,12 +1,16 @@
 class Player
 {
-  constructor(id, name, x, y, width, height)
+  constructor(id, name, x, y, width, height, playerSpeed)
   {
     this.id = id;
     this.name = name || "Shithead";
-    this.x = x || 0;
-    this.y = y || 0;
-    this.width = width || 0;
-    this.height = height || 0;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.playerSpeed = playerSpeed || 10;
+    this.playerVelocityX = 0;
+    this.playerVelocityY = 0;
+    this.playerFriciton = 0.9;
   }
 }
