@@ -9,6 +9,8 @@ const input = new InputManager();
 const sprite = new Image();
 //const debug = new Debug();
 
+//const movement = new Movement();
+
 const maxPlayerHeight = 110;
 const maxPlayerWidth = 50;
 const players = [];
@@ -17,7 +19,7 @@ let collision = null;
 let spriteHeight;
 let spriteWidth;
 let me = null;
-
+let playerMovement = null;
 window.addEventListener('startGame', ()=>
 {
   startscreen.loadingScreen();
@@ -28,7 +30,7 @@ window.addEventListener('startGame', ()=>
 
     me = new Player(players.length, startscreen.name, 100, 100, spriteWidth, spriteHeight);
     collision = new BoxCollision(me);
-
+    playerMovement = new Movement(me);
     startscreen.destroy();
     socket.emit('join', me);
     setInterval(loop, 25);
@@ -45,7 +47,7 @@ socket.on('updatePlayers', (data)=>
 
 function loop()
 {
-  movementUpdate();
+  playerMovement.movementUpdate();
   if(collision != null)
   {
     const levelColliders = level.colliders;
@@ -67,6 +69,7 @@ socket.on('updateValues', (data)=>
     players[i].x = data[i].x;
     players[i].y = data[i].y;
   }
+
   draw();
 });
 
@@ -75,6 +78,7 @@ function draw()
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for(let i = 0; i < players.length; i++)
   {
+    //players[i].draw(ctx);
     ctx.drawImage(sprite, players[i].x - spriteWidth/2, players[i].y - spriteHeight/2, spriteWidth, spriteHeight);
     ctx.fillStyle = "white";
     ctx.fillText(players[i].name, players[i].x - players[i].name.length * 2, players[i].y - 60);
