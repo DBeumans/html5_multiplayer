@@ -21,6 +21,15 @@ class Startscreen
     this.nameField.setAttribute('class', 'inputField');
     this.nameField.setAttribute('autofocus', 'autofocus');
 
+    const passLabel = document.createElement('h3');
+    passLabel.setAttribute('class', 'label');
+    passLabel.innerHTML = "Password:";
+
+    this.passfield = document.createElement('input');
+    this.passfield.setAttribute('type', 'password');
+    this.passfield.setAttribute('maxlength', '32');
+    this.passfield.setAttribute('class', 'inputField');
+
     const startButton = document.createElement('input');
     startButton.setAttribute('type', 'button');
     startButton.setAttribute('value', 'Start Game!');
@@ -36,11 +45,17 @@ class Startscreen
     this.startWindow.appendChild(head);
     this.startWindow.appendChild(nameLabel);
     this.startWindow.appendChild(this.nameField);
+    this.startWindow.appendChild(passLabel);
+    this.startWindow.appendChild(this.passfield);
     this.startWindow.appendChild(startButton);
     this.startWindow.appendChild(creators);
     document.body.appendChild(this.startWindow);
 
-    startButton.addEventListener('click', () => window.dispatchEvent(startEvent));
+    startButton.addEventListener('click', () => {
+      if(this.password != "mustard")
+        return;
+      window.dispatchEvent(startEvent);
+    });
   }
 
   loadingScreen()
@@ -55,5 +70,6 @@ class Startscreen
   }
 
   get name(){return this.nameField.value};
+  get password(){return this.passfield.value};
   destroy(){document.body.removeChild(this.startWindow);}
 };

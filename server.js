@@ -11,8 +11,8 @@ app.get('/', (req, res)=>{res.sendFile(__dirname + '/index.html');});
 io.on('connection', client =>
 {
   client.send(client.id);
-
   client.emit('updatePlayers', game.data);
+
   client.on('join', player =>
   {
     game.addData(player);
@@ -29,7 +29,6 @@ io.on('connection', client =>
 
   client.on('disconnect', ()=>
   {
-    console.log(client.id + " left");
     game.removePlayer(client.id);
     client.broadcast.emit('updatePlayers', game.data);
   });

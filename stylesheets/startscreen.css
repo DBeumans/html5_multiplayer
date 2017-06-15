@@ -1,7 +1,7 @@
 #window
 {
   width: 20em;
-  height: 25em;
+  height: 30em;
   top: 2em;
   left: calc(50% - 10em);
   position: fixed;

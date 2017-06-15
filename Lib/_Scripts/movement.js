@@ -1,52 +1,49 @@
 class Movement {
-  constructor(player) {
+  constructor() {
     this.input = new InputManager();
-    this.player = player;
-    console.log(this.input);
-    console.log(this.player);
   }
 
-  movementUpdate() {
+  movementUpdate(player) {
     //Up | W , ArrowUP
     if(this.input.keys[38] == true || this.input.keys[87] == true)
     {
-      if(this.player.playerVelocityY > -this.player.playerSpeed)
+      if(player.playerVelocityY > -player.playerSpeed)
       {
-        this.player.playerVelocityY--;
+        player.playerVelocityY--;
       }
     }
 
     //Down | S , ArrowDOWN
     if(this.input.keys[40] == true || this.input.keys[83] == true)
     {
-      if(this.player.playerVelocityY < this.player.playerSpeed)
+      if(player.playerVelocityY < player.playerSpeed)
       {
-        this.player.playerVelocityY++;
+        player.playerVelocityY++;
       }
     }
 
     //Right | D , ArrowRIGHT
     if(this.input.keys[39] == true || this.input.keys[68] == true)
     {
-      if(this.player.playerVelocityX < this.player.playerSpeed)
+      if(player.playerVelocityX < player.playerSpeed)
       {
-        this.player.playerVelocityX++;
+        player.playerVelocityX++;
       }
     }
 
     //Left | A , ArrowLEFT
     if(this.input.keys[37] == true || this.input.keys[65] == true)
     {
-      if(this.player.playerVelocityX > -this.player.playerSpeed)
+      if(player.playerVelocityX > -player.playerSpeed)
       {
-        this.player.playerVelocityX--;
+        player.playerVelocityX--;
       }
     }
 
-    this.player.playerVelocityX *= this.player.playerFriciton;
-    this.player.playerVelocityY *= this.player.playerFriciton;
+    player.playerVelocityX *= player.playerFriciton;
+    player.playerVelocityY *= player.playerFriciton;
 
-    this.player.x += this.player.playerVelocityX;
-    this.player.y += this.player.playerVelocityY;
+    player.x += player.playerVelocityX;
+    player.y += player.playerVelocityY;
   }
 }
