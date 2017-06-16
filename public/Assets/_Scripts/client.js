@@ -65,7 +65,6 @@ function loop()
   if(me.y < 0 + (spriteHeight/2))me.y = 0+(spriteHeight/2);
   if(me.y > canvas.height - spriteHeight/2)me.y = canvas.height - spriteHeight/2;
   socket.emit('updateValues', me)
-  console.log(players);
   draw();
 }
 

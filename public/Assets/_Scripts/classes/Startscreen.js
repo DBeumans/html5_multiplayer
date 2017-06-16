@@ -51,7 +51,8 @@ class Startscreen
     this.startWindow.appendChild(creators);
     document.body.appendChild(this.startWindow);
 
-    startButton.addEventListener('click', () => {
+    startButton.addEventListener('click', () =>
+    {
       if(this.password != "mustard")
         return;
       window.dispatchEvent(startEvent);

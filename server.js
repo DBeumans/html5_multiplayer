@@ -7,7 +7,6 @@ const game = new Game();
 
 app.use(express.static(__dirname + "/public"));
 app.get('/', (req, res)=>{res.sendFile('index.html');});
-
 io.on('connection', client =>
 {
   client.send(client.id);
