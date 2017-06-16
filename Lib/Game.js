@@ -3,7 +3,7 @@ class Game
   constructor()
   {
     this.data = [];
-    console.log(io);
+
   }
 
   addData(playerData){this.data.push(playerData);}

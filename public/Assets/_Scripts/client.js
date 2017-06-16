@@ -32,7 +32,7 @@ window.addEventListener('startGame', ()=>
     socket.emit('join', me);
     setInterval(loop, 25);
   });
-  sprite.src = "Lib/images/test.png";
+  sprite.src = "Assets/images/test.png";
 });
 
 socket.on('updatePlayers', data =>

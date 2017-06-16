@@ -4,7 +4,7 @@ class Level
   {
     this.id = id || "level";
     this.obstacles = [];
-    canvas.style.backgroundImage = 'url(Lib/images/background.jpg)';
+    canvas.style.backgroundImage = 'url(Assets/images/background.jpg)';
     this.createWalls();
   }
 

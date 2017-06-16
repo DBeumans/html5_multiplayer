@@ -17,7 +17,7 @@ class Wall
       this.spriteHeight = (this.height/(this.yAmount * this.sprite.height)) * this.sprite.width;
     });
     this.id = id || "obstacle";
-    this.sprite.src = image || "Lib/images/wallSprite.png";
+    this.sprite.src = image || "Assets/images/wallSprite.png";
   }
 
   draw(ctx)
