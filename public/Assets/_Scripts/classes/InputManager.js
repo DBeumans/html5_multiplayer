@@ -8,14 +8,9 @@ class InputManager {
     //window.addEventListener("keypress", this.OnKeyPress.bind(this));
   }
 
-  OnKeyDown(e) {
-    this.keys[e.keyCode] = true;
-  }
+  OnKeyDown(e) {this.keys[e.keyCode] = true;}
 
-  OnKeyUp(e) {
-    this.keys[e.keyCode] = false;
-
-  }
+  OnKeyUp(e) {this.keys[e.keyCode] = false;}
 
   /***
 

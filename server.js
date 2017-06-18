@@ -10,25 +10,14 @@ app.get('/', (req, res)=>{res.sendFile('index.html');});
 io.on('connection', client =>
 {
   client.send(client.id);
-  client.emit('updatePlayers', game.data);
-
-  client.on('join', player =>
-  {
-    game.addData(player);
-    client.emit('updatePlayers', game.data);
-    client.broadcast.emit('updatePlayers', game.data);
-  });
 
   client.on('updateValues', playerData =>
   {
-    game.updateData(playerData);
-    client.emit('updateValues',game.data);
-    client.broadcast.emit('updateValues', game.data);
+    client.broadcast.emit('updateValues', playerData);
   });
 
   client.on('disconnect', ()=>
   {
-    game.removePlayer(client.id);
-    client.broadcast.emit('updatePlayers', game.data);
+    client.broadcast.emit('playerLeave', client.id);
   });
 });
