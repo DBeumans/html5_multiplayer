@@ -80,7 +80,7 @@ function draw()
   {
     ctx.drawImage(sprite, players[i].x - spriteWidth/2, players[i].y - spriteHeight/2, spriteWidth, spriteHeight);
     ctx.fillStyle = "white";
-    //ctx.fillText(players[i].name, players[i].x - players[i].name.length * 2, players[i].y - 60);
+    ctx.fillText(players[i].name, players[i].x - players[i].name.length * 2, players[i].y - 60);
     level.draw(ctx);
   }
 }
