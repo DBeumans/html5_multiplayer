@@ -2,7 +2,9 @@ class Startscreen
 {
   constructor(title)
   {
-    const startEvent = new Event('startGame');
+    this.startEvent = new Event('startGame');
+    const input = new InputManager();
+
     this.startWindow = document.createElement('div');
     this.startWindow.setAttribute('id', 'window');
 
@@ -51,12 +53,24 @@ class Startscreen
     this.startWindow.appendChild(creators);
     document.body.appendChild(this.startWindow);
 
-    startButton.addEventListener('click', () =>
+    startButton.addEventListener('click', () => {this.startGame()});
+    this.loop = setInterval(()=>{this.update(input)}, 20)
+  }
+
+  update(input)
+  {
+    if(input.keys[13])
     {
-      if(this.password != "mustard")
-        return;
-      window.dispatchEvent(startEvent);
-    });
+      this.startGame();
+      clearInterval(this.loop);
+    }
+  }
+
+  startGame()
+  {
+    if(this.password != "mustard")
+      return;
+    window.dispatchEvent(this.startEvent);
   }
 
   loadingScreen()

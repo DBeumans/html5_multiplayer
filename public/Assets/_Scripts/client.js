@@ -6,7 +6,6 @@ const ctx = canvas.getContext('2d');
 const startscreen = new Startscreen("SKANQUE SIMULATOR");
 const level = new Level("level1", canvas);
 const playerMovement = new Movement();
-const input = new InputManager();
 const sprite = new Image();
 
 const maxPlayerHeight = 110;
@@ -27,28 +26,12 @@ window.addEventListener('startGame', ()=>
     spriteHeight = sprite.height*(maxPlayerHeight/sprite.height);
     me = new Player(players.length, socket.id, startscreen.name, 100, 100, spriteWidth, spriteHeight);
     collision = new BoxCollision(me);
-
+    players.push(me);
     startscreen.destroy();
-    socket.emit('join', me);
     setInterval(loop, 25);
   });
   sprite.src = "Assets/images/test.png";
 });
-
-socket.on('updatePlayers', data =>
-{
-  if (data.length == 0) return;
-  players.splice(0, players.length);
-  for(let i = 0; i < data.length; i++)
-  {
-    players[i] = data[i];
-    if(me == null)
-      continue;
-    if(data[i].id == me.id)
-      me.index = data[i].index;
-  }
-});
-
 
 function loop()
 {
@@ -64,17 +47,29 @@ function loop()
   if(me.x > canvas.width - spriteWidth/2)me.x = canvas.width - spriteWidth/2;
   if(me.y < 0 + (spriteHeight/2))me.y = 0+(spriteHeight/2);
   if(me.y > canvas.height - spriteHeight/2)me.y = canvas.height - spriteHeight/2;
-  socket.emit('updateValues', me)
+  socket.emit('updateValues', me);
   draw();
 }
 
 socket.on('updateValues', data =>
 {
-  if(data.length == 0) return;
   for(let i = 0; i < players.length; i++)
   {
-    players[i].x = data[i].x;
-    players[i].y = data[i].y;
+    if(players[i].id == data.id)
+    {
+      players[i] = data;
+      return;
+    }
+  }
+  players.push(data);
+});
+
+socket.on('playerLeave', playerID =>
+{
+  for (let i = 0; i < players.length; i++)
+  {
+    if(players[i].id == playerID)
+      players.splice(i, 1);
   }
 });
 
@@ -85,7 +80,7 @@ function draw()
   {
     ctx.drawImage(sprite, players[i].x - spriteWidth/2, players[i].y - spriteHeight/2, spriteWidth, spriteHeight);
     ctx.fillStyle = "white";
-    ctx.fillText(players[i].name, players[i].x - players[i].name.length * 2, players[i].y - 60);
+    //ctx.fillText(players[i].name, players[i].x - players[i].name.length * 2, players[i].y - 60);
     level.draw(ctx);
   }
 }
