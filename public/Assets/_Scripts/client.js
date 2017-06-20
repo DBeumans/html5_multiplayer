@@ -22,8 +22,12 @@ window.addEventListener('startGame', ()=>
   startscreen.loadingScreen();
   sprite.addEventListener('load',()=>
   {
-    spriteWidth = sprite.width*(maxPlayerWidth/sprite.width);
-    spriteHeight = sprite.height*(maxPlayerHeight/sprite.height);
+    let factor = 1;
+    if(sprite.width > maxPlayerWidth)
+      factor = (maxPlayerWidth/sprite.width)
+
+    spriteHeight = sprite.height*factor;
+    spriteWidth = sprite.width*factor;
     me = new Player(players.length, socket.id, startscreen.name, 100, 100, spriteWidth, spriteHeight);
     collision = new BoxCollision(me);
     players.push(me);
@@ -78,7 +82,7 @@ function draw()
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for(let i = 0; i < players.length; i++)
   {
-    ctx.drawImage(sprite, players[i].x - spriteWidth/2, players[i].y - spriteHeight/2, spriteWidth, spriteHeight);
+    ctx.drawImage(sprite, players[i].x - spriteWidth/2, players[i].y - spriteHeight/2, players[i].width, players[i].height);
     ctx.fillStyle = "white";
     ctx.fillText(players[i].name, players[i].x - players[i].name.length * 2, players[i].y - 60);
     level.draw(ctx);

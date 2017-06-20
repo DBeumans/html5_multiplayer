@@ -16,8 +16,5 @@ io.on('connection', client =>
     client.broadcast.emit('updateValues', playerData);
   });
 
-  client.on('disconnect', ()=>
-  {
-    client.broadcast.emit('playerLeave', client.id);
-  });
+  client.on('disconnect', ()=> client.broadcast.emit('playerLeave', client.id));
 });
