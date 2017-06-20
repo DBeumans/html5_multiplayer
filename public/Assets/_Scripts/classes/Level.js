@@ -12,6 +12,7 @@ class Level
   {
     this.obstacles[this.obstacles.length] = new Wall(200, 500, 120,120, "wall");
     this.obstacles[this.obstacles.length] = new Wall(500, 500, 25, 200, "wall");
+    this.obstacles[this.obstacles.length] = new Wall(500, 600, 1000, 100, "ground");
   }
 
   draw(ctx)
@@ -19,5 +20,8 @@ class Level
     for(let i = 0; i < this.obstacles.length; i++) this.obstacles[i].draw(ctx);
   }
 
-  get colliders(){return this.obstacles};
+  get colliders()
+  {
+    return this.obstacles;
+  };
 }

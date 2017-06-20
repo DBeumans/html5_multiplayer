@@ -40,7 +40,19 @@ function loop()
   {
     const levelColliders = level.colliders;
     for(let i = 0; i < levelColliders.length; i++)
-      collision.checkCollision(levelColliders[i]);
+    {
+      let colObj = collision.checkCollision(levelColliders[i]);
+      var obj = JSON.parse(colObj);
+      if(obj == null)
+        continue;
+
+      if(obj.id == "ground")
+      {
+        me.playerGrounded = true;
+        me.playerCanJump = true;
+      }
+
+    }
   }
 
   if(me.x < 0 + (spriteWidth/2))me.x = 0 + (spriteWidth/2);
