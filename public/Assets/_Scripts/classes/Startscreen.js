@@ -30,7 +30,8 @@ class Startscreen
 
     this.nameField = document.createElement('input');
     this.nameField.setAttribute('class', 'input-field');
-    this.nameField.setAttribute('type', 'text')
+    this.nameField.setAttribute('type', 'text');
+    this.nameField.setAttribute('autofocus', 'autofocus');
     this.nameField.setAttribute('placeholder', 'Nickname');
     name_group.appendChild(this.nameField);
 
