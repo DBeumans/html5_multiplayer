@@ -30,6 +30,9 @@ class BoxCollision
         else
           this.object.x -= oX;
       }
+      let obj = JSON.stringify(objectB);
+      return obj;
     }
+    return null;
   }
 }

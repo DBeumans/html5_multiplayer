@@ -7,9 +7,9 @@ class Vector2
   }
 
   magnitude(){return Math.sqrt(this.dx * this.dx + this.dy + this.dy);}
-  scalarMul(scalar){return new Vector(scalar*this.dx, scalar*this.dy);}
-  add(vector){return new Vector(this.dx + vector.dx, this.dy + vector.dy);}
-  substract(vector){return new Vector(this.dx - vector.dx, this.dy - vector.dy);}
+  scalarMul(scalar){return new Vector2(scalar*this.dx, scalar*this.dy);}
+  add(vector){return new Vector2(this.dx + vector.dx, this.dy + vector.dy);}
+  substract(vector){return new Vector2(this.dx - vector.dx, this.dy - vector.dy);}
 
   normalize()
   {
