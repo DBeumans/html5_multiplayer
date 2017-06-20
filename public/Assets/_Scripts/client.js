@@ -49,7 +49,7 @@ function loop()
       if(obj.id == "ground")
       {
         me.playerGrounded = true;
-        me.playerIsJumping = false;
+        me.playerCanJump = true;
       }
 
     }

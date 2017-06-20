@@ -16,6 +16,6 @@ class Player
 
     this.playerGravity = .5;
     this.playerGrounded = false;
-    this.playerIsJumping = false;
+    this.playerCanJump = false;
   }
 }

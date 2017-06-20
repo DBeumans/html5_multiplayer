@@ -8,17 +8,14 @@ class Movement {
     //Up | W , ArrowUP
     if(this.input.keys[38] || this.input.keys[87] || this.input.keys[32])
     {
-      if(player.playerVelocityY > -player.playerSpeed)
+      if(player.playerGrounded && player.playerCanJump)
       {
-        if(player.playerGrounded && !player.playerIsJumping)
-        {
-          player.playerGrounded = false;
-          player.playerIsJumping = true;
-          player.playerVelocityY = -player.playerSpeed;
-        }
+        player.playerVelocityY = 0;
+        player.playerVelocityY = -player.playerSpeed;
+        player.playerCanJump = false;
+        player.playerGrounded = false;
       }
     }
-
     //Right | D , ArrowRIGHT
     if(this.input.keys[39] || this.input.keys[68] )
     {
@@ -42,10 +39,11 @@ class Movement {
 
     if(player.playerGrounded)
       player.playerVelocityY = 0;
+    if(player.playerJumpCounter<0)
+      player.playerJumpCounter=0;
 
     player.x += player.playerVelocityX;
     player.y += player.playerVelocityY;
-
 
   }
 }
