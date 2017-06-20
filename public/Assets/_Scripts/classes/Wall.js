@@ -6,6 +6,7 @@ class Wall
     this.y = y;
     this.width = (w > 50) ? w : 50;
     this.height = (h > 50) ? h : 50;
+    this.id = id || "obstacle";
     this.sprite = new Image();
     this.sprite.addEventListener('load', ()=>
     {
@@ -16,7 +17,6 @@ class Wall
       this.spriteWidth = (this.width/(this.xAmount * this.sprite.width)) * this.sprite.width;
       this.spriteHeight = (this.height/(this.yAmount * this.sprite.height)) * this.sprite.width;
     });
-    this.id = id || "obstacle";
     this.sprite.src = image || "Assets/images/wallSprite.png";
   }
 
