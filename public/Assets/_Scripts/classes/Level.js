@@ -10,9 +10,10 @@ class Level
 
   createWalls()
   {
-    this.obstacles[this.obstacles.length] = new Wall(200, 500, 120,120, "wall");
-    this.obstacles[this.obstacles.length] = new Wall(500, 500, 25, 200, "wall");
-    this.obstacles[this.obstacles.length] = new Wall(500, 600, 1000, 100, "ground");
+    this.obstacles[this.obstacles.length] = new Wall(200, 520, 80, 80, "ground", "Assets/images/wallSprite.png");
+    this.obstacles[this.obstacles.length] = new Wall(300, 430, 80, 80, "ground", "Assets/images/wallSprite.png");
+    this.obstacles[this.obstacles.length] = new Wall(500, 380, 200, 50, "ground", "Assets/images/wallSprite.png");
+    this.obstacles[this.obstacles.length] = new Wall(500, 600, 1000, 100, "ground", "Assets/images/grass.png");
   }
 
   draw(ctx)
