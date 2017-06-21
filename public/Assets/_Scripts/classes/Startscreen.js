@@ -1,9 +1,9 @@
 class Startscreen
 {
-  constructor(title)
+  constructor(title, _input)
   {
     this.startEvent = new Event('startGame');
-    const input = new InputManager();
+    const input = _input || new InputManager();
 
     /*WINDOW*/
     this.startWindow = document.createElement('div');
