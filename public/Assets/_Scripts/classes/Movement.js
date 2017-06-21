@@ -1,6 +1,6 @@
 class Movement {
-  constructor() {
-    this.input = new InputManager();
+  constructor(input) {
+    this.input = input || new InputManager();
     this.movement = new Vector2(0,0);
   }
 

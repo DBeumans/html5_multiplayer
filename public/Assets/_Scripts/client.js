@@ -3,10 +3,12 @@ const socket = io();
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-const startscreen = new Startscreen("SKANQUE SIMULATOR");
+const input = new InputManager();
+const mouseInput = new MouseInput(canvas);
+const startscreen = new Startscreen("SKANQUE SIMULATOR", input);
 const level = new Level("level1", canvas);
-const playerMovement = new Movement();
 const sprite = new Image();
+const playerMovement = new Movement(input);
 
 const maxPlayerHeight = 110;
 const maxPlayerWidth = 50;
@@ -49,7 +51,7 @@ function loop()
       var obj = JSON.parse(colObj);
       if(obj == null)
         continue;
-        
+
       if(obj.isJumpable && obj.objectDir == "top")
       {
         me.playerGrounded = true;

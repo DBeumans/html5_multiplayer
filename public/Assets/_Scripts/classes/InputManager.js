@@ -3,9 +3,11 @@ class InputManager {
   constructor() {
     this.keys = {}; // create a empty array to store keys
 
+    // Keyboard
     window.addEventListener("keydown", this.OnKeyDown.bind(this));
     window.addEventListener("keyup", this.OnKeyUp.bind(this));
     //window.addEventListener("keypress", this.OnKeyPress.bind(this));
+
   }
 
   OnKeyDown(e) {this.keys[e.keyCode] = true;}
