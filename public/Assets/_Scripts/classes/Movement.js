@@ -11,7 +11,7 @@ class Movement {
       if(player.playerGrounded && player.playerCanJump)
       {
         player.playerVelocityY = 0;
-        player.playerVelocityY = -player.playerSpeed;
+        player.playerVelocityY = player.playerJumpPower;
         player.playerCanJump = false;
         player.playerGrounded = false;
       }
@@ -38,9 +38,15 @@ class Movement {
     player.playerVelocityY += player.playerGravity;
 
     if(player.playerGrounded)
+    {
       player.playerVelocityY = 0;
-    if(player.playerJumpCounter<0)
-      player.playerJumpCounter=0;
+      if(player.playerVelocityY<=0)
+      {
+        player.playerVelocityY = 0;
+      }
+
+    }
+    player.playerGrounded = false;
 
     player.x += player.playerVelocityX;
     player.y += player.playerVelocityY;

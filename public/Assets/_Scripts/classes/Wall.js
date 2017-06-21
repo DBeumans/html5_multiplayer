@@ -1,12 +1,15 @@
 class Wall
 {
-  constructor(x, y, w, h, id, image)
+  constructor(x, y, w, h, id, jumpAble ,image)
   {
     this.x = x;
     this.y = y;
     this.width = (w > 50) ? w : 50;
     this.height = (h > 50) ? h : 50;
     this.id = id || "obstacle";
+    this.isJumpable = jumpAble;
+    this.objectDir = null; // The face of the object
+
     this.sprite = new Image();
     this.sprite.addEventListener('load', ()=>
     {
