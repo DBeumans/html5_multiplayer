@@ -13,8 +13,8 @@ class Player
     this.playerVelocityX = 0;
     this.playerVelocityY = 0;
     this.playerFriciton = 0.9;
-
-    this.playerGravity = .5;
+    this.playerJumpPower = -20; // negative number to go UP
+    this.playerGravity = 1;
     this.playerGrounded = false;
     this.playerCanJump = false;
   }

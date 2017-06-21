@@ -49,13 +49,12 @@ function loop()
       var obj = JSON.parse(colObj);
       if(obj == null)
         continue;
-
-      if(obj.id == "ground")
+        
+      if(obj.isJumpable && obj.objectDir == "top")
       {
         me.playerGrounded = true;
         me.playerCanJump = true;
       }
-
     }
   }
 

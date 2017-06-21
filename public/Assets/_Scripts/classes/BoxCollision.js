@@ -19,16 +19,28 @@ class BoxCollision
       if (oX >= oY)
       {
         if (yDifference > 0)
+        {
+          objectB.objectDir = "bottom";
           this.object.y += oY;
+        }
         else
+        {
+          objectB.objectDir = "top";
           this.object.y -= oY;
+        }
       }
       else
       {
         if (xDifference > 0)
+        {
+          objectB.objectDir = "left";
           this.object.x += oX;
+        }
         else
+        {
+          objectB.objectDir = "right";
           this.object.x -= oX;
+        }
       }
       return JSON.stringify(objectB);
     }

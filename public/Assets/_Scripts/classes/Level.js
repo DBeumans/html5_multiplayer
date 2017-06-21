@@ -10,19 +10,12 @@ class Level
 
   createWalls()
   {
-    this.obstacles[this.obstacles.length] = new Wall(200, 520, 80, 80, "ground", "Assets/images/wallSprite.png");
-    this.obstacles[this.obstacles.length] = new Wall(300, 430, 80, 80, "ground", "Assets/images/wallSprite.png");
-    this.obstacles[this.obstacles.length] = new Wall(500, 380, 200, 50, "ground", "Assets/images/wallSprite.png");
-    this.obstacles[this.obstacles.length] = new Wall(500, 600, 1000, 100, "ground", "Assets/images/grass.png");
+    this.obstacles[this.obstacles.length] = new Wall(200, 500, 120,120, "wall", true, "Assets/images/wall.png");
+    this.obstacles[this.obstacles.length] = new Wall(500, 500, 25, 200, "wall", true, "Assets/images/wall.png");
+    this.obstacles[this.obstacles.length] = new Wall(500, 600, 1000, 100, "ground", true, "Assets/images/grass.png");
+
   }
 
-  draw(ctx)
-  {
-    for(let i = 0; i < this.obstacles.length; i++) this.obstacles[i].draw(ctx);
-  }
-
-  get colliders()
-  {
-    return this.obstacles;
-  };
+  draw(ctx){for(let i = 0; i < this.obstacles.length; i++) this.obstacles[i].draw(ctx)}
+  get colliders(){return this.obstacles;};
 }
