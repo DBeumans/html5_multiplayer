@@ -32,6 +32,7 @@ window.addEventListener('startGame', ()=>
     spriteWidth = sprite.width*factor;
     me = new Player(players.length, socket.id, startscreen.name, 100, 100, spriteWidth, spriteHeight);
     collision = new BoxCollision(me);
+
     players.push(me);
     startscreen.destroy();
     setInterval(loop, 25);

@@ -10,7 +10,12 @@ class InputManager {
 
   }
 
-  OnKeyDown(e) {this.keys[e.keyCode] = true;}
+  OnKeyDown(e)
+  {
+    this.keys[e.keyCode] = true;
+    if(this.keys[32])
+       e.preventDefault();
+  }
 
   OnKeyUp(e) {this.keys[e.keyCode] = false;}
 
