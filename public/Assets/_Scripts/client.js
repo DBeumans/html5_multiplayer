@@ -12,7 +12,6 @@ const audioManager = new AudioManager("audioManager");
 const playerMovement = new Movement(input);
 const backgroundSong = audioManager.addClip("Assets/audio/music/background-song.ogg", true, "background");
 audioManager.playClip(backgroundSong);
-//console.log(audioManager.isPlaying(backgroundSong));
 
 const maxPlayerHeight = 110;
 const maxPlayerWidth = 50;
