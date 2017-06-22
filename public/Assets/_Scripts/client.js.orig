@@ -8,11 +8,14 @@ const mouseInput = new MouseInput(canvas);
 const startscreen = new Startscreen("SKANQUE SIMULATOR", input);
 const level = new Level("level1", canvas);
 const sprite = new Image();
+<<<<<<< HEAD
 const audioManager = new AudioManager("audioManager");
-const playerMovement = new Movement(input);
 const backgroundSong = audioManager.addClip("Assets/audio/music/background-song.ogg", true, "background");
 audioManager.playClip(backgroundSong);
 //console.log(audioManager.isPlaying(backgroundSong));
+=======
+const playerMovement = new Movement(input);
+>>>>>>> 7c2326b83137f43677c2e7d7fcbb4ed83844389a
 
 const maxPlayerHeight = 110;
 const maxPlayerWidth = 50;
