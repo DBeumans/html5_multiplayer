@@ -7,6 +7,10 @@ const startscreen = new Startscreen("SKANQUE SIMULATOR");
 const level = new Level("level1", canvas);
 const playerMovement = new Movement();
 const sprite = new Image();
+const audioManager = new AudioManager("audioManager");
+const backgroundSong = audioManager.addClip("Assets/audio/music/background-song.ogg", true, "background");
+audioManager.playClip(backgroundSong);
+//console.log(audioManager.isPlaying(backgroundSong));
 
 const maxPlayerHeight = 110;
 const maxPlayerWidth = 50;
@@ -49,7 +53,7 @@ function loop()
       var obj = JSON.parse(colObj);
       if(obj == null)
         continue;
-        
+
       if(obj.isJumpable && obj.objectDir == "top")
       {
         me.playerGrounded = true;
