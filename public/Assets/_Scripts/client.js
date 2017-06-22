@@ -37,6 +37,7 @@ window.addEventListener('startGame', ()=>
     spriteWidth = sprite.width*factor;
     me = new Player(players.length, socket.id, startscreen.name, 100, 100, spriteWidth, spriteHeight);
     collision = new BoxCollision(me);
+
     players.push(me);
     startscreen.destroy();
     setInterval(loop, 25);
@@ -61,6 +62,11 @@ function loop()
       {
         me.playerGrounded = true;
         me.playerCanJump = true;
+        me.playerJumpPower = -20;
+      }
+      if(obj.objectDir == "bottom")
+      {
+        me.playerVelocityY *=-0.5;
       }
     }
   }
