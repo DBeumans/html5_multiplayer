@@ -26,6 +26,13 @@ let me = null;
 
 window.addEventListener('startGame', ()=>
 {
+  startGame();
+});
+
+// Berend gaf als feedback om logic in een function te zetten.
+// Event en logic gescheiden houden.
+function startGame()
+{
   startscreen.loadingScreen();
   sprite.addEventListener('load',()=>
   {
@@ -43,7 +50,7 @@ window.addEventListener('startGame', ()=>
     setInterval(loop, 25);
   });
   sprite.src = "Assets/images/test.png";
-});
+}
 
 function loop()
 {
