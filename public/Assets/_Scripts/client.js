@@ -12,6 +12,7 @@ const audioManager = new AudioManager();
 const audioUI = new AudioUI();
 const playerMovement = new Movement(input);
 const backgroundSong = audioManager.addClip("Assets/audio/music/background-song.ogg", true, "background");
+const jumpSound = audioManager.addClip("Assets/audio/sounds/player/jump.wav", false, "fx");
 audioManager.playClip(backgroundSong);
 
 
@@ -29,8 +30,6 @@ window.addEventListener('startGame', ()=>
   startGame();
 });
 
-// Berend gaf als feedback om logic in een function te zetten.
-// Event en logic gescheiden houden.
 function startGame()
 {
   startscreen.loadingScreen();
@@ -71,10 +70,7 @@ function loop()
         me.playerCanJump = true;
         me.playerJumpPower = -20;
       }
-      if(obj.objectDir == "bottom")
-      {
-        me.playerVelocityY *=-0.5;
-      }
+      if(obj.objectDir == "bottom")me.playerVelocityY *=-0.5;
     }
   }
 

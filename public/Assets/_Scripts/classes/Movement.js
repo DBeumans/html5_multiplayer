@@ -14,6 +14,7 @@ class Movement {
         player.playerVelocityY = player.playerJumpPower;
         player.playerCanJump = false;
         player.playerGrounded = false;
+        audioManager.playClip(jumpSound);
       }
     }
     //Right | D , ArrowRIGHT
