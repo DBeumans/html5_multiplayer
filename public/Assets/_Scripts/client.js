@@ -62,7 +62,6 @@ function loop()
       {
         me.playerGrounded = true;
         me.playerCanJump = true;
-        me.playerJumpPower = -20;
       }
       if(obj.objectDir == "bottom")
       {
