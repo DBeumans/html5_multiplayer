@@ -67,7 +67,6 @@ function loop()
       {
         me.playerGrounded = true;
         me.playerCanJump = true;
-        me.playerJumpPower = -20;
       }
       if(obj.objectDir == "bottom")me.playerVelocityY *=-0.5;
     }
@@ -108,9 +107,7 @@ function draw()
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for(let i = 0; i < players.length; i++)
   {
-    ctx.drawImage(sprite, players[i].x - spriteWidth/2, players[i].y - spriteHeight/2, players[i].width, players[i].height);
-    ctx.fillStyle = "white";
-    ctx.fillText(players[i].name, players[i].x - players[i].name.length * 2, players[i].y - 60);
+    me.draw(ctx , sprite , players[i]);
     level.draw(ctx);
   }
 }

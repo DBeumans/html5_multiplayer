@@ -13,9 +13,18 @@ class Player
     this.playerVelocityX = 0;
     this.playerVelocityY = 0;
     this.playerFriciton = 0.9;
-    this.playerJumpPower = -10; // negative number to go UP
+    this.playerJumpPower = -18; // negative number to go UP
     this.playerGravity = 1.1;
     this.playerGrounded = false;
     this.playerCanJump = false;
+    this.sprite = "";
+  }
+
+  draw(ctx , sprite , player)
+  {
+    ctx.drawImage(sprite , player.x -player.width/2 , player.y - player.height/2, player.width , player.height );
+    ctx.fillStyle = '#fff';
+    ctx.fillText(player.name, player.x - player.name.length * 2, player.y - 60);
+
   }
 }
