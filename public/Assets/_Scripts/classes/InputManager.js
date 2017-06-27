@@ -4,7 +4,7 @@ class InputManager {
     this.keys = {}; // create a empty array to store keys
 
     // Keyboard
-    window.addEventListener("keydown", this.OnKeyDown.bind(this));
+    window.addEventListener("keydown",  this.OnKeyDown.bind(this));
     window.addEventListener("keyup", this.OnKeyUp.bind(this));
     //window.addEventListener("keypress", this.OnKeyPress.bind(this));
 
@@ -13,7 +13,7 @@ class InputManager {
   OnKeyDown(e)
   {
     this.keys[e.keyCode] = true;
-    if(this.keys[32])
+    if(this.keys[32] || this.keys[37] || this.keys[38] || this.keys[39] || this.keys[40])
        e.preventDefault();
   }
 
