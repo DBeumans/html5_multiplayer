@@ -1,7 +1,6 @@
-const socket = io();
-
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+const socket = io();
 
 const sprite = new Image();
 const audioUI = new AudioUI();
@@ -14,40 +13,38 @@ const startscreen = new Startscreen("SKANQUE SIMULATOR", input);
 const jumpSound = audioManager.addClip("Assets/audio/sounds/player/jump.wav", false, "fx");
 const backgroundSong = audioManager.addClip("Assets/audio/music/background-song.ogg", true, "background");
 
-const maxPlayerHeight = 110;
-const maxPlayerWidth = 50;
 const players = [];
+const maxPlayerWidth = 50;
+const maxPlayerHeight = 110;
 
-let collision = null;
-let spriteHeight;
-let spriteWidth;
-let me = null;
+let me, collision, spriteHeight, spriteWidth;
 
 audioManager.playClip(backgroundSong);
-window.addEventListener('startGame', ()=>
-{
-  startGame();
-});
+window.addEventListener('startGame', ()=> startGame());
 
 function startGame()
 {
   startscreen.loadingScreen();
   sprite.addEventListener('load',()=>
   {
-    let factor = 1;
-    if(sprite.width > maxPlayerWidth)
-      factor = (maxPlayerWidth/sprite.width)
-
-    spriteHeight = sprite.height*factor;
-    spriteWidth = sprite.width*factor;
-    me = new Player(players.length, socket.id, startscreen.name, 100, 100, spriteWidth, spriteHeight);
-    collision = new BoxCollision(me);
-
-    players.push(me);
+    createPlayer();
     startscreen.destroy();
     setInterval(loop, 25);
   });
   sprite.src = "Assets/images/test.png";
+}
+
+function createPlayer()
+{
+  let factor = 1;
+  if(sprite.width > maxPlayerWidth) factor = (maxPlayerWidth/sprite.width)
+  spriteHeight = sprite.height*factor;
+  spriteWidth = sprite.width*factor;
+
+  me = new Player(players.length, socket.id, startscreen.name, 100, 100, spriteWidth, spriteHeight);
+  collision = new BoxCollision(me);
+  socket.emit('onJoin', me);
+  players.push(me);
 }
 
 function loop()
