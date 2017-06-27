@@ -13,7 +13,10 @@ class AudioClip
 
     if(this.looping)
       this.audio.setAttribute('loop', 'loop');
-
+    this.audio.addEventListener("loadeddata", ()=>
+    {
+      this.duration = this.audio.duration;
+    });
     this.audio.volume = this.volume;
   }
 
@@ -22,14 +25,17 @@ class AudioClip
   get isPlaying(){return this.isplaying};
   play()
   {
-    this.audio.addEventListener("loadeddata", ()=>
-    {
-      this.audio.play();
-      this.isplaying = true;
-      if(!this.looping)
-        setTimeout(()=>this.isplaying = false, this.audio.duration * 1000);
-    });
+    this.audio.play();
+    this.isplaying = true;
+    if(!this.looping)
+      setTimeout(()=>this.isplaying = false, this.duration * 1000);
   }
-  stop(){this.audio.stop(); this.isplaying = false;}
-  adjustVolume(value){this.audio.volume = value;}
+  stop(){this.audio.pause(); this.isplaying = false; this.audio.currentTime = 0;}
+  pause(){this.audio.pause(); this.isplaying = true;}
+  adjustVolume(value){this.volume = value; this.audio.volume = this.volume;}
+  mute(value)
+  {
+    if(value)this.audio.volume = 0;
+    else this.audio.volume = this.volume;
+  }
 }

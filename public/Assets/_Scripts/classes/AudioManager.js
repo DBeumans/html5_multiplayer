@@ -3,7 +3,8 @@ class AudioManager
   constructor()
   {
     this.clips = [];
-    window.addEventListener('updateVolume', (e)=>{this.updateVolume(e)});
+    window.addEventListener('updateVolume', (e) => this.updateVolume(e));
+    window.addEventListener('mute', (e) => this.mute(e));
   }
 
   addClip(path, loop, id)
@@ -22,11 +23,12 @@ class AudioManager
 
     for (let i = 0; i < this.clips.length; i++)
     {
-      if(this.clips[i].id == audioName)
-      {
-        this.clips[i].adjustVolume(newValue);
-        //console.log(this.clips);
-      }
+      if(this.clips[i].id == audioName) this.clips[i].adjustVolume(newValue);
     }
+  }
+
+  mute(e)
+  {
+    for(let i = 0; i < this.clips.length; i++)this.clips[i].mute(e.detail.value);
   }
 }

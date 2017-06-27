@@ -3,17 +3,16 @@ const socket = io();
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-const input = new InputManager();
-const mouseInput = new MouseInput(canvas);
-const startscreen = new Startscreen("SKANQUE SIMULATOR", input);
-const level = new Level("level1", canvas);
 const sprite = new Image();
-const audioManager = new AudioManager();
 const audioUI = new AudioUI();
+const input = new InputManager();
+const audioManager = new AudioManager();
+const mouseInput = new MouseInput(canvas);
+const level = new Level("level1", canvas);
 const playerMovement = new Movement(input);
+const startscreen = new Startscreen("SKANQUE SIMULATOR", input);
+const jumpSound = audioManager.addClip("Assets/audio/sounds/player/jump.wav", false, "fx");
 const backgroundSong = audioManager.addClip("Assets/audio/music/background-song.ogg", true, "background");
-audioManager.playClip(backgroundSong);
-
 
 const maxPlayerHeight = 110;
 const maxPlayerWidth = 50;
@@ -24,7 +23,13 @@ let spriteHeight;
 let spriteWidth;
 let me = null;
 
+audioManager.playClip(backgroundSong);
 window.addEventListener('startGame', ()=>
+{
+  startGame();
+});
+
+function startGame()
 {
   startscreen.loadingScreen();
   sprite.addEventListener('load',()=>
@@ -43,7 +48,7 @@ window.addEventListener('startGame', ()=>
     setInterval(loop, 25);
   });
   sprite.src = "Assets/images/test.png";
-});
+}
 
 function loop()
 {
@@ -63,10 +68,7 @@ function loop()
         me.playerGrounded = true;
         me.playerCanJump = true;
       }
-      if(obj.objectDir == "bottom")
-      {
-        me.playerVelocityY *=-0.5;
-      }
+      if(obj.objectDir == "bottom")me.playerVelocityY *=-0.5;
     }
   }
 
