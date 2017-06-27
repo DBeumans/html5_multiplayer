@@ -105,9 +105,11 @@ socket.on('playerLeave', playerID =>
 function draw()
 {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
   for(let i = 0; i < players.length; i++)
   {
     me.draw(ctx , sprite , players[i]);
     level.draw(ctx);
   }
+  ctx.restore();
 }

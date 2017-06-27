@@ -23,6 +23,7 @@ class Movement {
       if(player.playerVelocityX < player.playerSpeed)
       {
         player.playerVelocityX++;
+        player.playerDirection = 1;
       }
     }
 
@@ -32,6 +33,7 @@ class Movement {
       if(player.playerVelocityX > -player.playerSpeed)
       {
         player.playerVelocityX--;
+        player.playerDirection = -1;
       }
     }
 
