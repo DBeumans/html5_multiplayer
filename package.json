@@ -3,7 +3,7 @@
   "version": "0",
   "description": "HTML5 game for MA",
   "scripts":{
-    "start": "server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.15.3",
