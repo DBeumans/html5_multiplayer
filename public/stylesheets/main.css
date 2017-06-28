@@ -1,0 +1,27 @@
+body
+{
+  background-color: #333333;
+}
+
+#canvas
+{
+  background-color: lightblue;
+  border: 2px solid black;
+  display: block;
+  margin: 0 auto;
+}
+
+h1
+{
+  color: white;
+  text-align: center;
+}
+
+#fps
+{
+  color: #333333;
+  position: relative;
+  width: 50%;
+  bottom: 37em;
+  left: calc(50% - 30.5em);
+}
