@@ -16,11 +16,14 @@ class Player
     this.playerGravity = 1.1;
     this.playerGrounded = false;
     this.playerCanJump = false;
+
+    this.playerDirection = 1;
   }
 
   draw(ctx , sprite , player)
   {
-    ctx.drawImage(sprite, player.x -player.width/2 , player.y - player.height/2, player.width , player.height );
+    ctx.drawImage(sprite,player.width,player.height, player.width, player.height, player.x , player.y , player.width, player.height);
+    // ctx.drawImage(sprite, player.x -player.width/2 , player.y - player.height/2, player.width , player.height );
     ctx.fillStyle = '#fff';
     ctx.fillText(player.name, player.x - player.name.length * 2, player.y - 60);
   }

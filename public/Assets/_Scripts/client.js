@@ -3,6 +3,9 @@ const ctx = canvas.getContext('2d');
 const socket = io();
 
 const sprite = new Image();
+
+const sprite2 = new Image();
+
 const audioUI = new AudioUI();
 const input = new InputManager();
 const audioManager = new AudioManager();
@@ -31,7 +34,7 @@ function startGame()
     startscreen.destroy();
     setInterval(loop, 25);
   });
-  sprite.src = "Assets/images/test.png";
+  sprite.src = "Assets/images/Player_sprite.png";
 }
 
 function createPlayer()
@@ -43,6 +46,8 @@ function createPlayer()
 
   me = new Player(socket.id, startscreen.name, 100, 100, spriteWidth, spriteHeight);
   collision = new BoxCollision(me);
+
+  console.log(spriteHeight + " "+ spriteWidth);
   socket.emit('onJoin', me);
   players.push(me);
 }
