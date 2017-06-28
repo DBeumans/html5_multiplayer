@@ -41,7 +41,7 @@ function createPlayer()
   spriteHeight = sprite.height*factor;
   spriteWidth = sprite.width*factor;
 
-  me = new Player(socket.id, startscreen.name, 100, 100);
+  me = new Player(socket.id, startscreen.name, 100, 100, spriteWidth, spriteHeight);
   collision = new BoxCollision(me);
   socket.emit('onJoin', me);
   players.push(me);
@@ -98,7 +98,7 @@ socket.on('playerLeave', playerID =>
 {
   for (let i = 0; i < players.length; i++)
   {
-    if(players[i].id == playerID) players.splice(i, 1);
+    if(players[i].id == playerID)players.splice(i, 1);
   }
 });
 
