@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const server = app.listen(3000);
+const server = app.listen(80);
 const io = require('socket.io')(server);
 
 app.use(express.static(__dirname + "/public"));
