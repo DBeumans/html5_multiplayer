@@ -1,7 +1,6 @@
 {
-  "name": "HTML5 game",
-  "version": "0",
-  "description": "HTML5 game for MA",
+  "name": "HTML5",
+  "description": "HTML5",
   "scripts":{
     "start": "node server.js"
   },
