@@ -36,26 +36,6 @@ class Startscreen
     this.nameField.setAttribute('placeholder', 'Nickname');
     name_group.appendChild(this.nameField);
 
-    /*PASSWORD*/
-    const pass_group = document.createElement('div');
-    pass_group.setAttribute('class', 'input-group');
-
-    const passIconBg = document.createElement('span');
-    passIconBg.setAttribute('class', 'icon-background');
-    pass_group.appendChild(passIconBg);
-
-    const passIcon = document.createElement('i');
-    passIcon.setAttribute('class', 'fa fa-key');
-    passIcon.setAttribute('aria-hidden', 'true');
-    passIconBg.appendChild(passIcon);
-
-    this.passField = document.createElement('input');
-    this.passField.setAttribute('placeholder', 'Room password');
-    this.passField.setAttribute('class', 'input-field');
-    this.passField.setAttribute('type', 'password');
-    this.passField.setAttribute('maxlength', '32');
-    pass_group.appendChild(this.passField);
-
     /*STARTBUTTON*/
     const button_group = document.createElement('div');
     button_group.setAttribute('class', 'input-group button-hover');
@@ -98,7 +78,6 @@ class Startscreen
     /*PUT WINDOW TOGETHER*/
     this.startWindow.appendChild(head);
     this.startWindow.appendChild(name_group);
-    this.startWindow.appendChild(pass_group);
     this.startWindow.appendChild(startButton);
     this.startWindow.appendChild(button_group);
     this.startWindow.appendChild(creators);
@@ -117,12 +96,7 @@ class Startscreen
     }
   }
 
-  startGame()
-  {
-    if(this.password != "mustard")
-      return;
-    window.dispatchEvent(this.startEvent);
-  }
+  startGame(){window.dispatchEvent(this.startEvent);}
 
   loadingScreen()
   {
@@ -131,11 +105,9 @@ class Startscreen
     const loadingText = document.createElement('h3');
     loadingText.setAttribute('class', 'head');
     loadingText.innerHTML = 'Loading...';
-
     this.startWindow.appendChild(loadingText);
   }
 
   get name(){return this.nameField.value};
-  get password(){return this.passField.value};
   destroy(){document.body.removeChild(this.startWindow);}
 };

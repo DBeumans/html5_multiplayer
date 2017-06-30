@@ -3,7 +3,7 @@ class Player
   constructor(id, name, x, y, width, height)
   {
     this.id = id;
-    this.name = name || "Shithead";
+    this.name = name || "player";
     this.x = x;
     this.y = y;
     this.width = width;
