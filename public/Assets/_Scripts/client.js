@@ -9,7 +9,7 @@ const audioManager = new AudioManager();
 const mouseInput = new MouseInput(canvas);
 const level = new Level("level1", canvas);
 const playerMovement = new Movement(input);
-const startscreen = new Startscreen("SKANQUE SIMULATOR", input);
+const startscreen = new Startscreen("HTML5 game", input);
 const jumpSound = audioManager.addClip("Assets/audio/sounds/player/jump.wav", false, "fx");
 const backgroundSong = audioManager.addClip("Assets/audio/music/background-song.ogg", true, "background");
 
@@ -41,7 +41,7 @@ function createPlayer()
   spriteHeight = sprite.height*factor;
   spriteWidth = sprite.width*factor;
 
-  me = new Player(socket.id, startscreen.name, 100, 100, spriteWidth, spriteHeight);
+  me = new Player(socket.id, startscreen.name, 100, 500, spriteWidth, spriteHeight);
   collision = new BoxCollision(me);
   socket.emit('onJoin', me);
   players.push(me);

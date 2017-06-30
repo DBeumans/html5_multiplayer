@@ -72,6 +72,10 @@ class AudioUI
     {
       const event = new CustomEvent('mute', {detail:{value:muteButton.checked}});
       window.dispatchEvent(event);
+      if(!muteButton.checked)
+        muteIcon.style.color = "white";
+      else
+        muteIcon.style.color = "gray";
     });
     container.appendChild(muteControls);
   }
