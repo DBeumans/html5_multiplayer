@@ -13,8 +13,8 @@ const startscreen = new Startscreen("HTML5 game", input);
 const jumpSound = audioManager.addClip("Assets/audio/sounds/player/jump.wav", false, "fx");
 const backgroundSong = audioManager.addClip("Assets/audio/music/background-song.ogg", true, "background");
 
-const maxPlayerHeight = 110;
-const maxPlayerWidth = 50;
+const maxPlayerHeight = 200;
+const maxPlayerWidth = 60;
 const players = [];
 
 let me, collision, spriteHeight, spriteWidth;
@@ -31,7 +31,7 @@ function startGame()
     startscreen.destroy();
     setInterval(loop, 25);
   });
-  sprite.src = "Assets/images/test.png";
+  sprite.src = "Assets/images/player.png";
 }
 
 function createPlayer()
@@ -105,9 +105,10 @@ socket.on('playerLeave', playerID =>
 function draw()
 {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  level.draw(ctx);
   for(let i = 0; i < players.length; i++)
   {
     me.draw(ctx, sprite, players[i]);
-    level.draw(ctx);
   }
 }
