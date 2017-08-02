@@ -1,10 +1,13 @@
-class Movement {
-  constructor(input) {
+class Movement
+{
+  constructor(input)
+  {
     this.input = input || new InputManager();
     this.movement = new Vector2(0,0);
   }
 
-  movementUpdate(player) {
+  movementUpdate(player)
+  {
     //Up | W , ArrowUP
     if(this.input.keys[38] || this.input.keys[87] || this.input.keys[32])
     {
@@ -17,6 +20,7 @@ class Movement {
         audioManager.playClip(jumpSound);
       }
     }
+
     //Right | D , ArrowRIGHT
     if(this.input.keys[39] || this.input.keys[68] )
     {
@@ -51,6 +55,5 @@ class Movement {
 
     player.x += player.playerVelocityX;
     player.y += player.playerVelocityY;
-
   }
 }

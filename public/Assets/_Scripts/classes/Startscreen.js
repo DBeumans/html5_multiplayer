@@ -5,6 +5,12 @@ class Startscreen
     this.startEvent = new Event('startGame');
     const input = _input || new InputManager();
 
+    this.createWindow(title);
+    this.loop = setInterval(()=>{this.update(input)}, 20)
+  }
+
+  createWindow(title)
+  {
     /*WINDOW*/
     this.startWindow = document.createElement('div');
     this.startWindow.setAttribute('id', 'window');
@@ -84,7 +90,6 @@ class Startscreen
     document.body.appendChild(this.startWindow);
 
     button_group.addEventListener('click', () => {this.startGame()});
-    this.loop = setInterval(()=>{this.update(input)}, 20)
   }
 
   update(input)

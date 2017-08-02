@@ -11,25 +11,28 @@ class Prop
       this.y = y || 200;
       this.id = id || "prop";
       if(animated)
-      {
-        this.animated = animated;
-        if(animationInfo == null || animationInfo.hAmount == null || animationInfo.vAmount == null ||  animationInfo.start==null || animationInfo.end==null)
-        {
-          this.animated=false;
-          return;
-        }
-
-        this.hAmount = animationInfo.hAmount;
-        this.vAmount = animationInfo.vAmount;
-        this.totalSprites = this.hAmount * this.vAmount;
-        this.sw = this.sprite.width/this.hAmount;
-        this.sh = this.sprite.height/this.vAmount;
-        this.start = animationInfo.start;
-        this.end = animationInfo.end;
-        this.i = this.start;
-      }
+        this.setupAnimation(animated, animationInfo);
     });
     this.sprite.src = spritePath;
+  }
+
+  setupAnimation(animated, animationInfo)
+  {
+    this.animated = animated;
+    if(animationInfo == null || animationInfo.hAmount == null || animationInfo.vAmount == null ||  animationInfo.start==null || animationInfo.end==null)
+    {
+      this.animated=false;
+      return;
+    }
+
+    this.hAmount = animationInfo.hAmount;
+    this.vAmount = animationInfo.vAmount;
+    this.totalSprites = this.hAmount * this.vAmount;
+    this.sw = this.sprite.width/this.hAmount;
+    this.sh = this.sprite.height/this.vAmount;
+    this.start = animationInfo.start;
+    this.end = animationInfo.end;
+    this.i = this.start;
   }
 
   draw(ctx)

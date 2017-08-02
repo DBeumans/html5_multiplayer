@@ -2,12 +2,31 @@ class AudioUI
 {
   constructor()
   {
-    const container = document.createElement('div');
-    container.setAttribute('id', 'audio-options');
+    const container = this.createUIContainer();
     document.body.appendChild(container);
 
+    const bgControls = this.createBackgroundControls();
+    container.appendChild(bgControls);
+
+    const fxControls = this.createFXControls();
+    container.appendChild(fxControls);
+
+    const muteControls = this.createMuteControls();
+    container.appendChild(muteControls);
+  }
+
+  createUIContainer()
+  {
+    const temp = document.createElement('div');
+    temp.setAttribute('id', 'audio-options');
+    return temp;
+  }
+
+  createBackgroundControls()
+  {
     const bgControls = document.createElement('div');
     bgControls.setAttribute('class', 'control-container');
+
     const backgroundLabel = document.createElement('h2');
     backgroundLabel.setAttribute('class', 'label');
     backgroundLabel.innerHTML = "Background volume:";
@@ -23,8 +42,12 @@ class AudioUI
       const event = new CustomEvent('updateVolume', {detail:{value:backgroundSlider.value, name:"background"}});
       window.dispatchEvent(event);
     });
-    container.appendChild(bgControls);
 
+    return bgControls
+  }
+
+  createFXControls()
+  {
     const fxControls = document.createElement('div');
     fxControls.setAttribute('class', 'control-container');
     const fxLabel = document.createElement('h2');
@@ -37,14 +60,16 @@ class AudioUI
     fxSlider.setAttribute('class', 'slider');
     fxSlider.value = 0.1;
     fxControls.appendChild(fxSlider);
-
     fxSlider.addEventListener('change', ()=>
     {
       const event = new CustomEvent('updateVolume', {detail:{value:fxSlider.value, name:"fx"}});
       window.dispatchEvent(event);
     });
-    container.appendChild(fxControls);
+    return fxControls;
+  }
 
+  createMuteControls()
+  {
     const muteControls = document.createElement('div');
     muteControls.setAttribute('class', 'control-container');
     const muteLabel = document.createElement('h2');
@@ -77,6 +102,6 @@ class AudioUI
       else
         muteIcon.style.color = "gray";
     });
-    container.appendChild(muteControls);
+    return muteControls;
   }
 };
