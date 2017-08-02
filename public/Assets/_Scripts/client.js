@@ -69,8 +69,7 @@ function checkCollision()
   {
     const colObj = collision.checkCollision(levelColliders[i]);
     const obj = JSON.parse(colObj);
-    if(obj == null)
-      continue;
+    if(obj == null) continue;
 
     if(obj.isJumpable && obj.objectDir == "top")
     {
@@ -97,9 +96,7 @@ socket.on('updateValues', data =>
 socket.on('playerLeave', playerID =>
 {
   for (let i = 0; i < players.length; i++)
-  {
-    if(players[i].id == playerID)players.splice(i, 1);
-  }
+    if(players[i].id == playerID) players.splice(i, 1);
 });
 
 function draw()
@@ -108,7 +105,5 @@ function draw()
 
   level.draw(ctx);
   for(let i = 0; i < players.length; i++)
-  {
     me.draw(ctx, sprite, players[i]);
-  }
 }
