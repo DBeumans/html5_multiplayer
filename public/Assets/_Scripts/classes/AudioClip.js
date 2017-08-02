@@ -6,13 +6,13 @@ class AudioClip
     this.id = id || "FX";
     this.volume = 0.1;
     this.isplaying = false;
+    
     this.audio = document.createElement('audio');
     this.audio.setAttribute('src', path);
     this.audio.setAttribute('id','source1');
     document.body.appendChild(this.audio);
 
-    if(this.looping)
-      this.audio.setAttribute('loop', 'loop');
+    if(this.looping) this.audio.setAttribute('loop', 'loop');
     this.audio.addEventListener("loadeddata", ()=>
     {
       this.duration = this.audio.duration;
